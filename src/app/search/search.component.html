@@ -1,0 +1,41 @@
+<h2>חיפוש</h2>
+
+<div class="row">
+  <div class="col">הקלד טקסט לחיפוש ב GitHub</div>
+</div>
+<div class="row">
+  <div class="col"><input [(ngModel)]="repositoryName" class="form-control" name="RepositoryName" id="RepositoryName" type="text" /></div>
+</div>
+<div class="row">
+  <div class="col"><button (click)="searchRepository()" [disabled]="!repositoryName || !repositoryName.trim()" type="button" class="btn btn-primary mt-3">חפש</button></div>
+</div>
+<div class="row" [hidden]="!showNotFoundMsg">
+  <div class="col" style="font-weight: 600; color: red;">לא נמצאו תוצאות</div>
+</div>
+
+<div class="mt-5" style="width: 20rem;" *ngIf="selectRepoOptions?.length > 0">
+  <div class="row">
+    <div calss="col">
+      <h4>שמירה במועדפים</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field style="width: 100%;" appearance="fill">
+        <mat-label>בחר Repository</mat-label>
+        <mat-select [(ngModel)]="favoriteRepository">
+          <mat-option *ngFor="let rn of selectRepoOptions" value="{{rn}}">{{rn}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col"><button (click)="saveRepository()" [disabled]="!favoriteRepository || !favoriteRepository.trim()" type="button" class="btn btn-primary mt-3">שמור</button></div>
+  </div>
+  <div class="row" [hidden]="!showSuccessMsg">
+    <div class="col" style="font-weight: 600; color: teal;">הפעולה בוצעה בהצלחה</div>
+  </div>
+
+</div>
+
+
